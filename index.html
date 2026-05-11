@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Best Productivity Hauler</title>
+<title>Produktivitas Area 2</title>
 
 <style>
 
@@ -18,6 +18,63 @@
 body{
     background:#edf2f7;
     padding:16px;
+    padding-top:96px;
+    padding-bottom:40px;
+}
+
+/* HEADER */
+
+.header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:72px;
+
+    padding-top:env(safe-area-inset-top);
+
+    background:
+    linear-gradient(
+    135deg,
+    #0d88d8,
+    #0077c8
+    );
+
+    display:flex;
+    align-items:center;
+
+    padding-left:20px;
+    padding-right:20px;
+
+    z-index:999;
+
+    box-shadow:
+    0 2px 10px rgba(0,0,0,0.08);
+}
+
+.header-title{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:white;
+
+    letter-spacing:0.4px;
+}
+
+.header-subtitle{
+
+    font-size:12px;
+
+    color:
+    rgba(255,255,255,0.82);
+
+    margin-top:2px;
 }
 
 /* CARD */
@@ -26,22 +83,32 @@ body{
 
     background:white;
 
-    border-radius:28px;
+    border-radius:22px;
 
-    padding:22px;
+    padding:16px 18px;
 
     box-shadow:
-    0 8px 20px rgba(0,0,0,0.06);
+    0 4px 14px rgba(0,0,0,0.05);
+
+    margin-bottom:14px;
+
+    cursor:pointer;
+
+    transition:0.2s;
+}
+
+.rank-card:hover{
+    transform:translateY(-2px);
 }
 
 /* TITLE */
 
 .rank-title{
 
-    font-size:24px;
+    font-size:18px;
     font-weight:bold;
 
-    margin-bottom:20px;
+    margin-bottom:10px;
 
     color:#111827;
 }
@@ -54,14 +121,7 @@ body{
     justify-content:space-between;
     align-items:center;
 
-    padding:14px 0;
-
-    border-bottom:
-    1px solid #ececec;
-}
-
-.rank-item:last-child{
-    border-bottom:none;
+    padding:4px 0;
 }
 
 /* LEFT */
@@ -72,33 +132,35 @@ body{
     flex-direction:column;
 }
 
-/* NRP */
+/* RANK */
 
 .rank-nrp{
 
-    font-size:13px;
+    font-size:11px;
 
-    color:#777;
+    color:#888;
 
-    margin-bottom:4px;
+    margin-bottom:2px;
 }
 
 /* NAME */
 
 .rank-name{
 
-    font-size:18px;
+    font-size:15px;
 
     font-weight:bold;
 
     color:#111;
+
+    line-height:1.25;
 }
 
-/* AVG */
+/* VALUE */
 
-.rank-avg{
+.rank-value{
 
-    font-size:20px;
+    font-size:18px;
 
     font-weight:bold;
 
@@ -110,17 +172,53 @@ body{
 @media(max-width:768px){
 
     .rank-title{
-        font-size:21px;
+        font-size:17px;
     }
 
     .rank-name{
-        font-size:16px;
+        font-size:14px;
     }
 
-    .rank-avg{
-        font-size:18px;
+    .rank-value{
+        font-size:17px;
     }
 
+}
+
+/* ADMIN CARD */
+
+.admin-card{
+
+    min-height:92px;
+
+    display:flex;
+    align-items:center;
+}
+
+.admin-subtitle{
+
+    font-size:13px;
+
+    color:#666;
+
+    line-height:1.5;
+
+    margin-top:2px;
+}
+
+/* FOOTER */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    font-size:9px;
+
+    color:#9aa0a6;
+
+    padding-bottom:8px;
 }
 
 </style>
@@ -128,17 +226,34 @@ body{
 
 <body>
 
-<!-- CARD -->
+<!-- HEADER -->
 
-<div class="rank-card">
+<div class="header">
 
-    <div class="rank-title">
-        Best Productivity Hauler
+    <div>
+
+        <div class="header-title">
+            PRODUKSI AREA 2
+        </div>
+
+        <div class="header-subtitle">
+            Kita Bisa Jadi Juara
+        </div>
+
     </div>
 
-    <!-- DATA -->
+</div>
 
-    <div id="ranking-container">
+<!-- CARD LOADER -->
+
+<div class="rank-card"
+onclick="window.location.href='loader.html'">
+
+    <div class="rank-title">
+        Best Productivity Loader
+    </div>
+
+    <div id="loader-container">
 
         Loading...
 
@@ -146,75 +261,132 @@ body{
 
 </div>
 
+<!-- CARD HAULER -->
+
+<div class="rank-card"
+onclick="window.location.href='hauler.html'">
+
+    <div class="rank-title">
+        Best Productivity Hauler
+    </div>
+
+    <div id="hauler-container">
+
+        Loading...
+
+    </div>
+
+</div>
+
+<!-- CARD 3 -->
+
+<div class="rank-card admin-card"
+onclick="window.location.href='groupleader.html'">
+
+    <div>
+
+        <div class="rank-title">
+            Review Administrasi GL
+        </div>
+
+        <div class="admin-subtitle">
+            CNM, Observasi, Siap, SAP,
+            Inspeksi, Jarvis dan SS
+        </div>
+
+    </div>
+
+</div>
+
+<!-- CARD 4 -->
+
+<div class="rank-card admin-card"
+onclick="window.location.href='operator.html'">
+
+    <div>
+
+        <div class="rank-title">
+            Review Administrasi Operator
+        </div>
+
+        <div class="admin-subtitle">
+            Siap, SAP, Jarvis,
+            IPeak dan SS
+        </div>
+
+    </div>
+
+</div>
+
 <script>
 
-/* CSV URL */
+/* =========================
+   JSON URL
+========================= */
 
-const csvUrl =
-"https://docs.google.com/spreadsheets/d/e/2PACX-1vStBmKto9Q87qPBzQkEf1CMDp-gWcydsbpGMO6y6mlaCXzC6_xMpOoijPyfM91uSJCpOkTolUK2INa5/pub?output=csv";
+const loaderJson =
+"https://script.google.com/macros/s/AKfycbwIHfwWPkMSdKSEBW_CUiATkMQTYSbAeYdEbxltrRChrPLShGyu_EQzk7f7DEy3HxUkcQ/exec";
 
-/* FETCH CSV */
+const haulerJson =
+"https://script.google.com/macros/s/AKfycbztIby6h6aFUwoueGcgborb6HIsFKXBpiv2zapYa_bY8HMeCnf0bjVgse3-4jXD4GM/exec";
 
-fetch(csvUrl)
-.then(response => response.text())
+/* =========================
+   LOADER
+========================= */
 
-.then(csv => {
+fetch(loaderJson + "?nocache=" + new Date().getTime())
 
-    const rows =
-    csv.trim().split("\n");
+.then(response => response.json())
 
-    /* HEADER */
+.then(data => {
 
-    const headers =
-    rows[0].split(",");
+    data.sort((a,b) =>
+    parseInt(a.RANKING) -
+    parseInt(b.RANKING));
 
-    /* DATA */
+    const best =
+    data[0];
 
-    let html = "";
+    let prodty =
+    best.ACHIEVEMENT ||
+    best["ACHIEVEMENT"] ||
+    best["% PRODTY"] ||
+    best.PRODTY ||
+    "-";
 
-    for(let i = 1; i < 6; i++){
+    /* FORMAT PERCENT */
 
-        const cols =
-        rows[i].split(",");
+    prodty =
+    (parseFloat(prodty) * 100)
+    .toFixed(2)
+    .replace(".", ",") + "%";
 
-        /* SESUAIKAN INDEX COLUMN */
+    const html = `
 
-        const nrp =
-        cols[0];
+    <div class="rank-item">
 
-        const nama =
-        cols[1];
+        <div class="rank-left">
 
-        const avg =
-        cols[2];
-
-        html += `
-
-        <div class="rank-item">
-
-            <div class="rank-left">
-
-                <div class="rank-nrp">
-                    ${nrp}
-                </div>
-
-                <div class="rank-name">
-                    ${nama}
-                </div>
-
+            <div class="rank-nrp">
+                Ranking #${best.RANKING}
             </div>
 
-            <div class="rank-avg">
-                ${avg}
+            <div class="rank-name">
+                ${best.NRP} - ${best.NAMA}
             </div>
 
         </div>
 
-        `;
-    }
+        <div class="rank-value">
+            ${prodty}
+        </div>
+
+    </div>
+
+    `;
 
     document
-    .getElementById("ranking-container")
+    .getElementById("loader-container")
     .innerHTML = html;
 
 })
@@ -222,13 +394,80 @@ fetch(csvUrl)
 .catch(error => {
 
     document
-    .getElementById("ranking-container")
+    .getElementById("loader-container")
     .innerHTML =
-    "Gagal mengambil data.";
+    "Gagal load data";
+
+});
+
+/* =========================
+   HAULER
+========================= */
+
+fetch(haulerJson + "?nocache=" + new Date().getTime())
+
+.then(response => response.json())
+
+.then(data => {
+
+    data.sort((a,b) =>
+    parseInt(a.RANKING) -
+    parseInt(b.RANKING));
+
+    const best =
+    data[0];
+
+    const avg =
+    best["AVG PRODTY"] ||
+    best.AVG ||
+    "-";
+
+    const html = `
+
+    <div class="rank-item">
+
+        <div class="rank-left">
+
+            <div class="rank-nrp">
+                Ranking #${best.RANKING}
+            </div>
+
+            <div class="rank-name">
+                ${best.NRP} - ${best.NAMA}
+            </div>
+
+        </div>
+
+        <div class="rank-value">
+            ${avg}
+        </div>
+
+    </div>
+
+    `;
+
+    document
+    .getElementById("hauler-container")
+    .innerHTML = html;
+
+})
+
+.catch(error => {
+
+    document
+    .getElementById("hauler-container")
+    .innerHTML =
+    "Gagal load data";
 
 });
 
 </script>
+
+<!-- FOOTER -->
+
+<div class="footer">
+    Create by toharison
+</div>
 
 </body>
 </html>
