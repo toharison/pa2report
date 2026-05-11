@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Productivity Hauler</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#edf2f7;
+    padding:16px;
+    padding-top:96px;
+    padding-bottom:40px;
+}
+
+/* HEADER */
+
+.header{
+
+    position:fixed;
+
+    top:0;
+    left:0;
+
+    width:100%;
+
+    height:72px;
+
+    padding-top:env(safe-area-inset-top);
+
+    background:
+    linear-gradient(
+    135deg,
+    #005baa,
+    #0077c8
+    );
+
+    display:flex;
+    align-items:center;
+
+    padding-left:20px;
+    padding-right:20px;
+
+    z-index:999;
+
+    box-shadow:
+    0 2px 10px rgba(0,0,0,0.08);
+}
+
+.header-title{
+
+    font-size:17px;
+
+    font-weight:700;
+
+    color:white;
+
+    letter-spacing:0.4px;
+}
+
+.header-subtitle{
+
+    font-size:12px;
+
+    color:
+    rgba(255,255,255,0.82);
+
+    margin-top:2px;
+}
+
+/* CARD */
+
+.card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:18px;
+
+    box-shadow:
+    0 6px 16px rgba(0,0,0,0.06);
+
+    margin-bottom:14px;
+}
+
+/* TITLE */
+
+.card-title{
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    color:#111827;
+
+    margin-bottom:14px;
+}
+
+/* SEARCH */
+
+.search-box{
+
+    display:flex;
+
+    gap:10px;
+}
+
+.search-input{
+
+    flex:1;
+
+    height:44px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#f3f4f6;
+
+    padding:0 16px;
+
+    font-size:14px;
+
+    outline:none;
+}
+
+.search-button{
+
+    border:none;
+
+    background:#0077c8;
+
+    color:white;
+
+    padding:0 18px;
+
+    border-radius:14px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+/* TABLE */
+
+.table-container{
+
+    overflow-x:auto;
+}
+
+table{
+
+    width:100%;
+
+    border-collapse:collapse;
+}
+
+th{
+
+    text-align:left;
+
+    font-size:13px;
+
+    color:#666;
+
+    padding:12px 10px;
+
+    border-bottom:
+    1px solid #ececec;
+}
+
+td{
+
+    font-size:14px;
+
+    padding:12px 10px;
+
+    border-bottom:
+    1px solid #f1f1f1;
+}
+
+tr:last-child td{
+    border-bottom:none;
+}
+
+/* RESULT */
+
+.result-empty{
+
+    text-align:center;
+
+    color:#888;
+
+    font-size:13px;
+
+    padding:16px 0;
+}
+
+/* FOOTER */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:18px;
+
+    font-size:11px;
+
+    color:#9aa0a6;
+
+    padding-bottom:8px;
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .card-title{
+        font-size:18px;
+    }
+
+    th{
+        font-size:12px;
+    }
+
+    td{
+        font-size:13px;
+    }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<div class="header">
+
+    <div>
+
+        <div class="header-title">
+            Productivity Hauler
+        </div>
+
+        <div class="header-subtitle">
+            Kita Bisa Jadi Juara
+        </div>
+
+    </div>
+
+</div>
+
+<!-- SEARCH CARD -->
+
+<div class="card">
+
+    <div class="card-title">
+        Cari Productivity Hauler
+    </div>
+
+    <div class="search-box">
+
+        <input
+        type="text"
+        id="searchInput"
+        class="search-input"
+        placeholder="Masukkan NRP">
+
+        <button
+        class="search-button"
+        onclick="searchData()">
+
+            Search
+
+        </button>
+
+    </div>
+
+</div>
+
+<!-- RESULT CARD -->
+
+<div class="card">
+
+    <div class="card-title">
+        Hasil Pencarian
+    </div>
+
+    <div id="result">
+
+        <div class="result-empty">
+            Silakan masukkan NRP
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+    create by toharison
+</div>
+
+<script>
+
+const csvUrl =
+"https://docs.google.com/spreadsheets/d/e/2PACX-1vStBmKto9Q87qPBzQkEf1CMDp-gWcydsbpGMO6y6mlaCXzC6_xMpOoijPyfM91uSJCpOkTolUK2INa5/pub?output=csv";
+
+let csvData = [];
+
+/* LOAD CSV */
+
+fetch(csvUrl)
+
+.then(response => response.text())
+
+.then(csv => {
+
+    const rows =
+    csv.trim().split("\n");
+
+    for(let i = 1; i < rows.length; i++){
+
+        csvData.push(
+        rows[i].split(",")
+        );
+    }
+
+});
+
+/* SEARCH */
+
+function searchData(){
+
+    const nrp =
+    document
+    .getElementById("searchInput")
+    .value
+    .trim();
+
+    const result =
+    csvData.find(row =>
+    row[1] === nrp);
+
+    if(result){
+
+        const html = `
+
+<div class="table-container">
+
+    <table>
+
+        <tr>
+            <th>NRP</th>
+            <td>${result[1]}</td>
+        </tr>
+
+        <tr>
+            <th>Nama</th>
+            <td>${result[2]}</td>
+        </tr>
+
+        <tr>
+            <th>NRP GLS</th>
+            <td>${result[3]}</td>
+        </tr>
+
+        <tr>
+            <th>Nama GLS</th>
+            <td>${result[4]}</td>
+        </tr>
+
+        <tr>
+            <th>AVG Prodty</th>
+            <td>${result[5]}</td>
+        </tr>
+
+        <tr>
+            <th>Point</th>
+            <td>${result[6]}</td>
+        </tr>
+
+        <tr>
+            <th>Ranking</th>
+            <td>${result[7]}</td>
+        </tr>
+
+    </table>
+
+</div>
+
+`;
+
+        document
+        .getElementById("result")
+        .innerHTML = html;
+
+    }
+
+    else{
+
+        document
+        .getElementById("result")
+        .innerHTML = `
+
+        <div class="result-empty">
+            Data tidak ditemukan
+        </div>
+
+        `;
+    }
+
+}
+
+</script>
+
+</body>
+</html>
